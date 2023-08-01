@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  notification:
+    build: ./notification-microservice
+    ports:
+      - "8000:8000"
+  todos:
+    build: ./todos-microservice
+    ports:
+      - "8080:8080"
