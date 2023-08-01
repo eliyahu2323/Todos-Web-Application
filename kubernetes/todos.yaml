@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: todos
+  template:
+    metadata:
+      labels:
+        app: todos
+    spec:
+      containers:
+        - name: todos
+          image: eliyahuabraham/microservice-todos:latest
+          # env:
+          #   - name: DATABASE
+          #     value: "The user of your database"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-service
+spec:
+  selector:
+    app: todos
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
